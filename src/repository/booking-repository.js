@@ -22,11 +22,22 @@ class BookingRepository{
     }
   }
 
-  async update(data){
+  async update(bookingId, data){
     try {
-      
+      const booking = await Booking.findByPk(bookingId);
+      if(data.status){
+        booking.status = data.status;
+      }
+      const response = await booking.save();
+      return response;
     } catch (error) {
-      
+      throw new AppError(
+        'RepositoryError',
+        'Cannot update booking', 
+        'There was some issue updating the booking, please try again later', 
+        StatusCodes.BAD_REQUEST)
     }
   }
 }
+
+module.exports = BookingRepository;

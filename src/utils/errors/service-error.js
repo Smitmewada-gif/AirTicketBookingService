@@ -8,7 +8,7 @@ class ServiceError extends Error{
   ){
     super();
     this.name = 'ServiceError',
-    this.message = 'message',
+    this.message = message,
     this.explanation = explanation,
     this.statusCode = statusCode
   }
